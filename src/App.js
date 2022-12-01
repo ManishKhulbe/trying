@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+//class component =========>
+// import './App.css';
+
+// import React, {
+//   Component
+// } from 'react'
+
+// export class App extends Component {
+
+//   render() {
+//     return (
+//       <div> App </div>
+//     )
+//   }
+// }
+//class component =========>
+import React, { useState } from "react";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
+  const [expensesData, setExpenseData] = useState([]);
+
+  const addExpenseHandler = (expenseData) => {
+
+     setExpenseData((prevExpenses) => [expenseData, ...prevExpenses]);
+  };
+
+  console.log(expensesData);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> Expense Tracker </h1>
+      
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses expenseData={expensesData} />
     </div>
   );
 }
